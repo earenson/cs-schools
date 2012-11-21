@@ -7,8 +7,8 @@
  var App = function(){
     
     // Public vars
-    //var baseURL = 'http://api.civicapps.org/schools/';
-    var baseURL = 'http://api.civicapps.local:8888/schools/';
+    var baseURL = 'http://api.civicapps.org/schools/';
+    //var baseURL = 'http://api.civicapps.local:8888/schools/';
 
     return{
     
