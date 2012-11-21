@@ -49,19 +49,10 @@
     ?>
 
 <script type="text/javascript">
-<<<<<<< HEAD
     
     CitySync.connect(function(){
         // Proceed with your app
-=======
 
-    // Authentication isn't yet enabled. Passing dummy values. 
-    
-    // Initialize the app
-    var init = CitySync.init({
-        appID:'1234',
-        appURL:'pass'               
->>>>>>> 613d7f6a34fdc82f80f36dbf3087a5dcb1ddf2fb
     });
     
 </script>
