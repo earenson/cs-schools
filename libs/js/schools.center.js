@@ -18,7 +18,7 @@
          */
         getSchools:function(args){
        //Call the Schools API
-            query = 'near/'+CitySync.user.location.lat+','+CitySync.user.location.long+'?type='+args.type+'&range='+args.range;               
+            query = 'near/'+CitySync.user.location.lat+','+CitySync.user.location.long+'?type='+args.type+'&range='+args.range+'&callback=?';               
             $.getJSON(baseURL+query, function(data){
                 if(!data){
                 
