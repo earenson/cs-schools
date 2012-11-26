@@ -3,7 +3,7 @@ $(function(){
     // Show active panels
     $('.panel.active').show();
 
-    console.log('Active section: '+ $('#panel-nav li.active').attr('id'));
+    //console.log('Active section: '+ $('#panel-nav li.active').attr('id'));
 
     // Listen to Panel Nav
     $('#panel-nav li').click(function(){

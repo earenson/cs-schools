@@ -46,7 +46,7 @@
 
             <div id="cs-schools-data">
                 <div id="ratings">
-                    <p id="ayp"><span class="label">Federal Adequate Yearly Progress Report:</span><img src="images/help_icon.png" title="Adequate Yearly Progress, required under the No Child Left Behind act for schools and districts, measures improvement towards Federal goals ranging from teachers' qualifications to students' test scores. Failure to meet AYP goals can lead to a series of measures including allowing students to transfer to other schools to appointing a new school principal, and other punitive measures." style="float:right; margin: 2px 0 0 6px"/><span class="number">?</span></p>
+                    <p id="ayp"><span class="label">ESEA Designation:</span><img src="images/help_icon.png" title="The Elementary and Secondary Educaton Act (ESEA) is a federal statute, enacted in 1965, aiming to close the achievement gap between students by providing each child with fair and equal opportunities to achieve an exceptional education." style="float:right; margin: 2px 0 0 6px"/><span class="number">?</span></p>
 
                     <p id="overall"><span class="label">Oregon Report Card Overall Rating:</span><img src="images/help_icon.png" title="Published annualy, the Oregon Statewide Report Card rates a school's overall progress based on student performance. A school designated as 'In Need of Improvement' must file a comprehensive school improvement plan with the Superintendent of Public Instruction, the school district board, and the school's 21st Century Schools Council." style="float:right; margin: 2px 0 0 6px"/><span class="number">?</span></p>
             </div>
@@ -57,7 +57,7 @@
                     <ul>
                         <li id="overview" class="panel-link active">overview</li>
                         <li id="achievement" class="panel-link">Academic Achievement</li>
-                        <li class="year">2010-2011</li>
+                        <li class="year">2011-2012</li>
                     </ul>
                 </nav>
                 

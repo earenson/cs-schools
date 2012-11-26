@@ -121,6 +121,7 @@ select{max-width: 405px; margin-bottom: 6px;}
   .less,.red{color:#900000;}
   .more,.green{color: #33CC33;}
   .orange{color:#C69633;}
+  .grey{font-weight: normal; font-style: italic; color: #666}
   
 /* Tooltip */
 

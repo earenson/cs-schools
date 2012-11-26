@@ -46,6 +46,30 @@
         $('#cs-schools-details span.phone').text(school.PhoneNumber);
         $('#cs-schools-details span.address').text(school.StreetAddress1 + ' Portland OR, ' + school.Zip);
         
+        // Since we now have multiple districts, we need to try to grab news from the appropriate source based on school chosen
+        switch(school.DistrictName){
+            case "David Douglas SD 40":
+                newsFeed = 'http://www.ddouglas.k12.or.us/en/taxonomy/term/105/0/feed';
+                break;
+            case "Portland SD 1J":
+                newsFeed = 'http://www.pps.k12.or.us/news/feed.xml';
+                break;
+            case "Centennial SD 28J":
+                // No feed available
+                break;
+            case "Parkrose SD 3":
+                // Feed is improperly formatted
+                // newsFeed = 'http://do.parkrose.k12.or.us/index.php?id=275';
+                break;
+            case "Reynolds SD 7":
+                // No feed available. Emailed asking for one.
+                break;
+            case "Riverdale SD 51J":
+                newsFeed = 'http://www.riverdale.k12.or.us/site/RSS.aspx?DomainID=1&ModuleInstanceID=464&PageID=1';
+                break;
+            
+        }
+        
         getRSSfeed(newsFeed, "news");
         getRSSfeed(eventsFeed, "events");    
         
@@ -140,7 +164,8 @@
         }
         
         listHTML = '<select id="school-list">';
-        $.each(data, function(i) {
+        $.each(data.results, function(i) {
+
             var selection='';
             if($('#cs-schools').data('id') == this.SchoolID){ selection = ' selected="selected"';}
             listHTML += '<option value="' + this.SchoolID +'"' + selection +'">' + this.SchoolName + '</option>';
@@ -260,19 +285,20 @@
      */ 
     function showSchoolData(data) {    
         var results = data.results;
-        $('#cs-schools-data #ratings #ayp span.number').text(results.AypDesignation);
+        if(results.ESEADesignation==''){ results.ESEADesignation = "No Designation"; }
+        $('#cs-schools-data #ratings #ayp span.number').text(results.ESEADesignation);
         $('#cs-schools-data #ratings #overall span.number').text(results.OverallRating);
-        if (results.AypDesignation == "MET") {
-            $('#cs-schools-data #ratings #ayp span.number').addClass('green').removeClass('red');
+        if (results.ESEADesignation == "No Designation") {
+            $('#cs-schools-data #ratings #ayp span.number').addClass('grey').removeClass('green');
         } else {
-            $('#cs-schools-data #ratings #ayp span.number').addClass('red').removeClass('green');
+            $('#cs-schools-data #ratings #ayp span.number').addClass('green').removeClass('red');
         }
         if (results.OverallRating == "Outstanding") {
             $('#cs-schools-data #ratings #overall span.number').addClass('green').removeClass('red orange');
         } else if (results.OverallRating == "Satisfactory") {
             $('#cs-schools-data #ratings #overall span.number').addClass('orange').removeClass('green red');
         } else {
-            $('#cs-schools-data #ratings #overall span.number').addClass('red').removeClass('green orange');
+            $('#cs-schools-data #ratings #overall span.number').addClass('green').removeClass('green orange');
         }    
     
     

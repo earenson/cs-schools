@@ -18,8 +18,10 @@
          */
         getSchools:function(args){
        //Call the Schools API
-            query = 'near/'+CitySync.user.location.lat+','+CitySync.user.location.long+'?type='+args.type+'&range='+args.range+'&jsonp=?';               
+            query = 'near/'+CitySync.user.location.long+','+CitySync.user.location.lat+'?type='+args.type+'&range='+args.range+'&callback=?'; 
+                                 
             $.getJSON(baseURL+query, function(data){
+                                    
                 if(!data){
                 
                     $('.error p').text('There was an error processing your search. Try your search again, or try adjusting your selections.');
@@ -27,7 +29,7 @@
                 }else if(!data.results){
                     // No results found
 
-                    schoolsHTML = '<div id="schools-list"><ul><li class="header-row"><p class="header-label school-name">School name</p><p class="header-label ayp-rating">AYP Rating</p><p class="header-label state-rating">State Rating</p></li><li class="no-results"><p class="school-name">There were no schools found in your search. Try increasing your radius, or changing the school type.</p><li class="footer-row"><p class="header-label school-name back">&lsaquo; BACK</p></li></ul></div>';
+                    schoolsHTML = '<div id="schools-list"><ul><li class="header-row"><p class="header-label school-name">School name</p><p class="header-label ayp-rating">ESEA Rating</p><p class="header-label state-rating">State Rating</p></li><li class="no-results"><p class="school-name">There were no schools found in your search. Try increasing your radius, or changing the school type.</p><li class="footer-row"><p class="header-label school-name back">&lsaquo; BACK</p></li></ul></div>';
             
                     $('.widget-center').html(schoolsHTML);
                     
@@ -36,7 +38,7 @@
                         });
                 } else {
                     // Prep and place container
-                    schoolsHTML = '<div id="schools-list"><ul><li class="header-row"><p class="header-label school-name">School name</p><p class="header-label ayp-rating">AYP Rating</p><p class="header-label state-rating">State Rating</p></li><li class="footer-row"><p class="header-label school-name back">&lsaquo; BACK</p></li></ul></div>';
+                    schoolsHTML = '<div id="schools-list"><ul><li class="header-row"><p class="header-label school-name">School name</p><p class="header-label ayp-rating">ESEA Rating</p><p class="header-label state-rating">State Rating</p></li><li class="footer-row"><p class="header-label school-name back">&lsaquo; BACK</p></li></ul></div>';
             
                     $('.widget-center').html(schoolsHTML);
                     
@@ -49,6 +51,7 @@
                     
                     app.getDetails(schoolsArr);                    
                 }
+                
             })
         },
     
@@ -89,7 +92,7 @@
         getDetails: function(schools){
                         
             for(var x = 0; x < schools.length; x++){
-                $.getJSON(baseURL+'/'+schools[x], function(data){
+                $.getJSON(baseURL+schools[x]+'?callback=?', function(data){
                     if(!data){
                         $('.error p').text('There were no data found for this school ID. Please change your search and try again.');
                     } else {
@@ -98,7 +101,7 @@
                         var aypClass;
                         var stateClass;
                         
-                        switch(data.results.AypDesignation){
+                        switch(data.results.ESEADesignation){
                             case 'MET':
                                 aypClass = 'green';
                                 break;
@@ -119,8 +122,11 @@
                                 break;
                         }
                         
+                        if(data.results.ESEADesignation == ''){
+                            data.results.ESEADesignation = '<em>NO RATING</em>';
+                        }
                         
-                        schoolHTML = '<li id="'+data.results.SchoolID+'"><p class="school-name"><a data-url="'+CitySync.appdata.fullurl+'?appvars=schoolID-'+data.results.SchoolID+'">'+data.results.SchoolName+'</a></p><p class="ayp-rating '+aypClass+'">'+data.results.AypDesignation+'</p><p class="state-rating '+stateClass+'">'+data.results.OverallRating+'</p></li>';
+                        schoolHTML = '<li id="'+data.results.SchoolID+'"><p class="school-name"><a data-url="'+CitySync.appdata.fullurl+'?appvars=schoolID-'+data.results.SchoolID+'">'+data.results.SchoolName+'</a></p><p class="ayp-rating '+aypClass+'">'+data.results.ESEADesignation+'</p><p class="state-rating '+stateClass+'">'+data.results.OverallRating+'</p></li>';
                         
                         $('#schools-list .footer-row').before(schoolHTML);
                         
