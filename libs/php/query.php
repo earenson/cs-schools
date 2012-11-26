@@ -15,9 +15,7 @@
  // Using stream_context_create to avoid the automagic 15 sec. timeout a la:
  // http://stackoverflow.com/questions/3629504/php-file-get-contents-very-slow-when-using-full-url
  
-  /* 
  $context = stream_context_create(array('http' => array('header'=>'Connection: close')));
- 
 
  if(!isset($_GET['q'])){
     $school_data = file_get_contents('http://api.civicapps.org/schools/',false,$context);
@@ -26,8 +24,9 @@
     $school_data = file_get_contents('http://api.civicapps.org/schools/' . $_GET['id'],false,$context);
     echo $school_data;
  }
- */
 
+
+/*
  //LOCALHOST TESTING 
  
   $context = stream_context_create(array('http' => array('header'=>'Connection: close')));
@@ -43,6 +42,6 @@
     echo $school_data;
  
  } 
-
+ */
 
 ?>
